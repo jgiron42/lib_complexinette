@@ -1,11 +1,16 @@
+//
+// Created by joachim on 3/13/22.
+//
+
+#ifndef FT_CONTAINERS_COMPLEXINETTE_TEMPLATES_HPP
+#define FT_CONTAINERS_COMPLEXINETTE_TEMPLATES_HPP
 #include "complexinette.hpp"
 
 namespace lib_complexinette
 {
-	int ntest;
 
 	template <class C>
-	float	evaluate_function(C c)
+	float	evaluate_function(C c, int ntest)
 	{
 		float ret = 0;
 		int fd;
@@ -17,16 +22,14 @@ namespace lib_complexinette
 			ret += (float)(perf_count_stop(fd));
 		}
 		return (ret / ntest);
-	}
+	}template <class C>
 
-	template <class C>
-	lib_complexinette::complexities get_complexity(int n)
+	complexities get_complexity(int ntest)
 	{
 		std::map<int, float> result;
-		ntest = n;
 		for (int i = 0; i < MAX_SIZE; i++)
 		{
-			float ret = evaluate_function(C(powl(10, i)));
+			float ret = evaluate_function(C(powl(10, i)), ntest);
 #ifdef COMPLEXINETTE_DEBUG
 			std::cout << powl(10, i) << " -> " << ret << std::endl;
 #endif
@@ -35,3 +38,5 @@ namespace lib_complexinette
 		return (aprox(result));
 	}
 }
+
+#endif //FT_CONTAINERS_COMPLEXINETTE_TEMPLATES_HPP

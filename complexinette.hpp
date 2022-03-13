@@ -65,6 +65,6 @@ namespace lib_complexinette
 	extern float (*complexitiesf[])(int, params);
 	extern std::string names[];
 
-	extern int ntest;
 }
+#include "templates.hpp"
 #endif //COMPLEXINETTE_COMPLEXINETTE_HPP
