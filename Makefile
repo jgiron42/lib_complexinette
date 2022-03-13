@@ -1,6 +1,6 @@
 NAME = libcomplexinette.a
 
-SRCS = aprox.cpp complexities_functions.cpp perf_wrapper.cpp
+SRCS = aprox.cpp complexities_functions.cpp perf_wrapper.cpp evaluate_function.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
