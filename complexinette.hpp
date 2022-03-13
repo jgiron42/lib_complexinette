@@ -59,6 +59,7 @@ namespace lib_complexinette
 	float comp_quad(int n, params p);
 	float comp_cub(int n, params p);
 	float comp_exp(int n, params p);
+	complexities get_complexity(int n);
 
 	extern float (*complexitiesf[])(int, params);
 	extern std::string names[];
