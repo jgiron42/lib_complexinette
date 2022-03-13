@@ -10,30 +10,16 @@ namespace lib_complexinette
 {
 
 	template <class C>
-	float	evaluate_function(C c, int ntest)
-	{
-		float ret = 0;
-		int fd;
-		for (int i = 0; i < ntest; ++i)
-		{
-			c.set();
-			fd = perf_count_begin();
-			c();
-			ret += (float)(perf_count_stop(fd));
-		}
-		return (ret / ntest);
-	}template <class C>
-
-	complexities get_complexity(int ntest)
+	complexities get_complexity()
 	{
 		std::map<int, float> result;
 		for (int i = 0; i < MAX_SIZE; i++)
 		{
-			float ret = evaluate_function(C(powl(10, i)), ntest);
+			float ret = evaluate_function(new C(powl(2, i)));
 #ifdef COMPLEXINETTE_DEBUG
-			std::cout << powl(10, i) << " -> " << ret << std::endl;
+			std::cout << powl(2, i) << " -> " << ret << std::endl;
 #endif
-			result[powl(10, i)] = ret;
+			result[powl(2, i)] = ret;
 		}
 		return (aprox(result));
 	}

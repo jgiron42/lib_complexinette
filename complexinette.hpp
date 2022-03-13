@@ -19,13 +19,14 @@
 #include <iostream>
 #include <vector>
 #ifndef NTEST
-#define NTEST 10
+#define NTEST 30
 #endif
 #ifndef MAX_SIZE
-#define MAX_SIZE 6
+#define MAX_SIZE 10
 #endif
 #include <cmath>
-
+#include "measurable_class.hpp"
+//#define COMPLEXINETTE_DEBUG
 namespace lib_complexinette
 {
 	typedef struct s_params {
@@ -41,7 +42,7 @@ namespace lib_complexinette
 		LOG,
 		SQRT,
 		LINEAR,
-		NLOGN,
+		LINEARITHMIC,
 		QUAD,
 		CUB,
 		EXP
@@ -60,8 +61,8 @@ namespace lib_complexinette
 	float comp_cub(int n, params p);
 	float comp_exp(int n, params p);
 	template <class C>
-	complexities get_complexity(int n);
-
+	complexities get_complexity();
+	float	evaluate_function(measurable_class *c);
 	extern float (*complexitiesf[])(int, params);
 	extern std::string names[];
 

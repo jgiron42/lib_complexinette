@@ -6,16 +6,18 @@
 #define COMPLEXINETTE_I_MEASURABLE_CLASS_HPP
 
 namespace lib_complexinette {
-	class I_measurable_class {
-
+	class measurable_class {
+	public:
+		long int n;
 		/**
 		 * instanciate an object for the measure n
 		 */
-//	virtual constructor(int n) = 0;
+		measurable_class() : n(0) {};
+		measurable_class(int n) : n(n) {};
 		/**
 		 * set the class for the next call
 		 */
-		virtual void set() = 0;
+		virtual void set() {};
 
 		/**
 		 * the measured call (must contain only the instructions to measure)
