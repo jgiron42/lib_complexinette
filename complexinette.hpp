@@ -45,7 +45,8 @@ namespace lib_complexinette
 		LINEARITHMIC,
 		QUAD,
 		CUB,
-		EXP
+		EXP,
+		SIGNALED
 	}	complexities;
 
 	long long int perf_count_stop(int fd);

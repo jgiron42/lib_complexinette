@@ -24,7 +24,7 @@ namespace lib_complexinette {
 
 		fd = perf_event_open(&conf, 0, -1, -1, 0);
 		if (fd == -1) {
-			perror("complexinette:");
+			perror("complexinette: perf");
 			exit(1);
 		}
 
