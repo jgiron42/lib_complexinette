@@ -4,7 +4,10 @@
 
 #ifndef COMPLEXINETTE_COMPLEXINETTE_HPP
 #define COMPLEXINETTE_COMPLEXINETTE_HPP
+//#define _GNU_SOURCE
 #include <sys/ioctl.h>
+#include <sys/wait.h>
+#include <signal.h>
 #include <linux/perf_event.h>
 #include <linux/hw_breakpoint.h>
 #include <sys/types.h>
@@ -18,6 +21,9 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include <cstring>
+#include <errno.h>
+#include <sched.h>
 #ifndef NTEST
 #define NTEST 30
 #endif
@@ -46,11 +52,14 @@ namespace lib_complexinette
 		QUAD,
 		CUB,
 		EXP,
+
+		TIMEOUT,
+		ERROR,
 		SIGNALED
 	}	complexities;
 
 	long long int perf_count_stop(int fd);
-	int	perf_count_begin();
+	int	perf_count_begin(pid_t pid);
 	complexities aprox(std::map<int, float> &stats);
 
 	float comp_const(int n, params p);

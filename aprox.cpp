@@ -24,6 +24,8 @@ namespace lib_complexinette {
 			"quadratic",
 			"cubic",
 			"exponential",
+			"TIMEOUT",
+			"ERROR",
 			//			"factorial",
 	};
 

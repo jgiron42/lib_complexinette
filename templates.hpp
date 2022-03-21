@@ -16,6 +16,12 @@ namespace lib_complexinette
 		for (int i = 0; i < MAX_SIZE; i++)
 		{
 			float ret = evaluate_function(new C(powl(2, i)));
+			if (ret == 0)
+				return (ERROR);
+			if (ret == -1)
+				return (TIMEOUT);
+			if (ret < 0)
+				return (static_cast<enum e_complexities>(static_cast<int>(SIGNALED) - 1 - ((int)ret)));
 #ifdef COMPLEXINETTE_DEBUG
 			std::cout << powl(2, i) << " -> " << ret << std::endl;
 #endif

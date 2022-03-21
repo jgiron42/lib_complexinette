@@ -11,7 +11,7 @@ namespace lib_complexinette {
 		return ret;
 	}
 
-	int perf_count_begin() {
+	int perf_count_begin(pid_t pid) {
 		int fd;
 		struct perf_event_attr conf = {
 				.type = PERF_TYPE_HARDWARE,
@@ -22,7 +22,7 @@ namespace lib_complexinette {
 				.exclude_hv = 1
 		};
 
-		fd = perf_event_open(&conf, 0, -1, -1, 0);
+		fd = perf_event_open(&conf, pid, -1, -1, 0);
 		if (fd == -1) {
 			perror("complexinette: perf");
 			exit(1);
