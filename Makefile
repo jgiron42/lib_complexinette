@@ -6,7 +6,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 CC = clang++
 
-FLAGS = -g3
+FLAGS = -g3 -std=c++20
 
 .cpp.o :
 		$(CC) $(FLAGS) -c $< -o ${<:.cpp=.o}

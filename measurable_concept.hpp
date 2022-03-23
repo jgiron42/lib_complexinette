@@ -5,6 +5,15 @@
 #ifndef COMPLEXINETTE_I_MEASURABLE_CLASS_HPP
 #define COMPLEXINETTE_I_MEASURABLE_CLASS_HPP
 
+template <class C>
+concept Measurable = requires (C c, int n)
+{
+	{ delete new C(n) };
+	{c.n} -> std::same_as<long int>;
+	c.set();
+	c();
+};
+
 namespace lib_complexinette {
 	class measurable_class {
 	public:

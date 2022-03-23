@@ -31,7 +31,7 @@
 #define MAX_SIZE 10
 #endif
 #include <cmath>
-#include "measurable_class.hpp"
+#include "measurable_concept.hpp"
 //#define COMPLEXINETTE_DEBUG
 namespace lib_complexinette
 {
@@ -70,8 +70,10 @@ namespace lib_complexinette
 	float comp_quad(int n, params p);
 	float comp_cub(int n, params p);
 	float comp_exp(int n, params p);
-	template <class C>
+	template <Measurable C>
 	complexities get_complexity();
+	int my_waitpid(pid_t pid, int *status, int options, long long int timeout);
+	template <Measurable C>
 	float	evaluate_function(measurable_class *c);
 	extern float (*complexitiesf[])(int, params);
 	extern std::string names[];

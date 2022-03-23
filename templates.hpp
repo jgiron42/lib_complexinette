@@ -9,7 +9,7 @@
 namespace lib_complexinette
 {
 
-	template <class C>
+	template <Measurable C>
 	complexities get_complexity()
 	{
 		std::map<int, float> result;
@@ -28,6 +28,40 @@ namespace lib_complexinette
 			result[powl(2, i)] = ret;
 		}
 		return (aprox(result));
+	}
+
+	template <Measurable C>
+	float evaluate_function(C *c) {
+		pid_t pid;
+		float ret = 0;
+		int	status;
+		int fd;
+		for (int i = 0; i < NTEST; ++i) {
+			pid = fork();
+			if (pid == -1)
+				throw std::runtime_error( std::strerror(errno));
+			if (pid == 0) {
+				c->set();
+				raise(SIGSTOP);
+				(*c)();
+				exit(0);
+			}
+			if (my_waitpid(pid, &status, WUNTRACED, 10000))
+				return (0);
+			if (WIFSTOPPED(status))
+			{
+				fd = perf_count_begin(pid);
+				kill(pid, SIGCONT);
+				if (my_waitpid(pid, &status, 0, 2000))
+					return (-1);
+			}
+			else
+				return (0);
+			if (WIFSIGNALED(status))
+				return (-1 - WTERMSIG(status));
+			ret += (float) (perf_count_stop(fd));
+		}
+		return (ret / NTEST);
 	}
 }
 
