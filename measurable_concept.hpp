@@ -4,15 +4,18 @@
 
 #ifndef COMPLEXINETTE_I_MEASURABLE_CLASS_HPP
 #define COMPLEXINETTE_I_MEASURABLE_CLASS_HPP
+#include <unistd.h>
+#include <stdlib.h>
 
-template <class C>
-concept Measurable = requires (C c, int n)
-{
-	{ delete new C(n) };
-	{c.n} -> std::same_as<long int>;
-	c.set();
-	c();
-};
+// c++20 snif snif
+//template <class C>
+//concept Measurable = requires (C c, int n)
+//{
+//	{ delete new C(n) };
+//	{c.n} -> std::same_as<long int>;
+//	c.set();
+//	c();
+//};
 
 namespace lib_complexinette {
 	class measurable_class {
@@ -21,7 +24,7 @@ namespace lib_complexinette {
 		/**
 		 * instanciate an object for the measure n
 		 */
-		measurable_class() : n(0) {};
+		measurable_class() : n(0) {srand(time(NULL));};
 		measurable_class(int n) : n(n) {};
 		/**
 		 * set the class for the next call

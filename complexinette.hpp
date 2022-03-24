@@ -25,11 +25,12 @@
 #include <errno.h>
 #include <sched.h>
 #ifndef NTEST
-#define NTEST 30
+#define NTEST 60
 #endif
 #ifndef MAX_SIZE
-#define MAX_SIZE 10
+#define MAX_SIZE 9
 #endif
+#define WORST_CASE
 #include <cmath>
 #include "measurable_concept.hpp"
 //#define COMPLEXINETTE_DEBUG
@@ -70,10 +71,10 @@ namespace lib_complexinette
 	float comp_quad(int n, params p);
 	float comp_cub(int n, params p);
 	float comp_exp(int n, params p);
-	template <Measurable C>
+	template <class C>
 	complexities get_complexity();
 	int my_waitpid(pid_t pid, int *status, int options, long long int timeout);
-	template <Measurable C>
+	template <class C>
 	float	evaluate_function(measurable_class *c);
 	extern float (*complexitiesf[])(int, params);
 	extern std::string names[];

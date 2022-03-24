@@ -9,7 +9,7 @@
 namespace lib_complexinette
 {
 
-	template <Measurable C>
+	template <class C>
 	complexities get_complexity()
 	{
 		std::map<int, float> result;
@@ -30,7 +30,7 @@ namespace lib_complexinette
 		return (aprox(result));
 	}
 
-	template <Measurable C>
+	template <class C>
 	float evaluate_function(C *c) {
 		pid_t pid;
 		float ret = 0;
@@ -59,9 +59,21 @@ namespace lib_complexinette
 				return (0);
 			if (WIFSIGNALED(status))
 				return (-1 - WTERMSIG(status));
+#ifdef WORST_CASE
+			{
+				float tmp = (float) (perf_count_stop(fd));
+				if (tmp > ret)
+					ret = tmp;
+			};
+#else
 			ret += (float) (perf_count_stop(fd));
+#endif
 		}
+#ifdef WORST_CASE
+		return (ret);
+#else
 		return (ret / NTEST);
+#endif
 	}
 }
 
