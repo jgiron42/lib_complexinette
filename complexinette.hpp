@@ -25,7 +25,7 @@
 #include <errno.h>
 #include <sched.h>
 #ifndef NTEST
-#define NTEST 60
+#define NTEST 20
 #endif
 #ifndef MAX_SIZE
 #define MAX_SIZE 9
