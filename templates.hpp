@@ -37,7 +37,11 @@ namespace lib_complexinette
 		int	status;
 		int fd;
 		for (int i = 0; i < NTEST; ++i) {
-#ifndef UNCONFINED
+#ifdef UNCONFINED
+			c->set();
+			fd = perf_count_begin(0);
+			(*c)();
+#else
 			pid = fork();
 			if (pid == -1)
 				throw std::runtime_error( std::strerror(errno));
@@ -60,25 +64,21 @@ namespace lib_complexinette
 				return (0);
 			if (WIFSIGNALED(status))
 				return (-1 - WTERMSIG(status));
-#else
-			c->set();
-			fd = perf_count_begin(0);
-			(*c)();
 #endif
-#ifdef WORST_CASE
+#ifdef AVERAGE_COMPLEXITY
+			ret += (float) (perf_count_stop(fd));
+#else
 			{
 				float tmp = (float) (perf_count_stop(fd));
 				if (tmp > ret)
 					ret = tmp;
 			};
-#else
-			ret += (float) (perf_count_stop(fd));
 #endif
 		}
-#ifdef WORST_CASE
-		return (ret);
-#else
+#ifdef AVERAGE_COMPLEXITY
 		return (ret / NTEST);
+#else
+		return (ret);
 #endif
 	}
 }

@@ -30,7 +30,6 @@
 #ifndef MAX_SIZE
 #define MAX_SIZE 9
 #endif
-#define WORST_CASE
 #include <cmath>
 #include "measurable_concept.hpp"
 //#define COMPLEXINETTE_DEBUG
