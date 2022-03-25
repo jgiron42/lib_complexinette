@@ -37,6 +37,7 @@ namespace lib_complexinette
 		int	status;
 		int fd;
 		for (int i = 0; i < NTEST; ++i) {
+#ifndef UNCONFINED
 			pid = fork();
 			if (pid == -1)
 				throw std::runtime_error( std::strerror(errno));
@@ -59,6 +60,11 @@ namespace lib_complexinette
 				return (0);
 			if (WIFSIGNALED(status))
 				return (-1 - WTERMSIG(status));
+#else
+			c->set();
+			fd = perf_count_begin(0);
+			(*c)();
+#endif
 #ifdef WORST_CASE
 			{
 				float tmp = (float) (perf_count_stop(fd));
